@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>Dock.qml</file>
+        <file>Images/figuras.svg</file>
+        <file>Stat.qml</file>
+        <file>WorkPlace.qml</file>
+    </qresource>
+</RCC>
