@@ -2,12 +2,11 @@
     
     var bloques = document.getElementById("blocks");
     var programa = document.getElementById("program");
-    console.log("hola puñal");
     
     var drake = dragula([bloques, programa], {
       copy: true,
       accepts: function(el, target, source, sibling){
-          //console.log("accept: " + target.className);
+         // console.log("accept: " + target.className);
           if(el.className.indexOf("p-expr-log") !== -1
             && target.className.indexOf("p-logica") === -1){
               return false;
@@ -23,7 +22,14 @@
       moves: dontMove
   });  
   drake.on("drop", function(el, target ,source){
-      //console.log(el.className);
+      //console.log(target.innerHTML);
+      if(target &&
+         target.className.indexOf("p-logica") !== -1){
+        removeTag("<br>", target);
+       //rmClass(el, "gu-transit");
+      }
+      
+      
       if(el.className.indexOf("p-repetir") !== -1){
           var mid = getChildByClassName(el, "p-repetir-mid");
           drake.containers.push(mid);          
@@ -71,4 +77,16 @@ function getChildByClassName(el, className){
             return childs[i];
         }        
     }
+}
+
+function removeTag(tag, el){
+  var html = el.innerHTML.replace(new RegExp(tag, 'g' ), "");
+  el.innerHTML = html;
+  //console.log(html);
+  
+}
+
+function rmClass (el,  className) {
+  el.className = el.className.replace(className, ' ');
+  //console.log(el.className);
 }
