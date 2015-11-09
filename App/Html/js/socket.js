@@ -1,4 +1,4 @@
-var WebChannel {
+var WebChannel = {
   qt: 0,
   ready: function(){
     return WebChannel.qt != 0;
@@ -12,7 +12,7 @@ var WebChannel {
     .qt
     .objects
     .parser
-    .load(json, callback);
+    .load(json, true, callback);
     return true;
 
   },
@@ -29,7 +29,7 @@ var WebChannel {
     .stop();
     return true;
   }
-}
+};
 
 
 (function init_socket(){
@@ -39,12 +39,13 @@ var WebChannel {
   var socket = new WebSocket(baseUrl);
   socket.onerror = function(error){
     console.log("Socket Error: " + error);
-    init_socket();
+    //init_socket();
   };
 
   socket.onopen = function(){
 
     new QWebChannel(socket, function(channel){
+      console.log("Connected");
       WebChannel.qt = channel;
       channel.objects.parser.message.connect(function (m){
         console.log(m);

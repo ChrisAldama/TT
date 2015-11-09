@@ -14,7 +14,9 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-    void setPage(const QString &s, const QString &path);
+
+public slots:
+    void loadPage(const QString &channel);
 
 private:
     Ui::MainWindow *ui;

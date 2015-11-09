@@ -2,5 +2,18 @@
     <qresource prefix="/">
         <file>p_test.olinki</file>
         <file>p_test_sino.olinki</file>
+        <file>Html/index.html</file>
+        <file>Html/js/index.js</file>
+        <file>Html/js/parser.js</file>
+        <file>Html/js/program.js</file>
+        <file>Html/js/socket.js</file>
+        <file>Html/node_modules/dragula/dist/dragula.js</file>
+        <file>Html/node_modules/dragula/dist/dragula.css</file>
+        <file>Html/node_modules/dragula/dist/dragula.min.js</file>
+        <file>Html/node_modules/dragula/dist/dragula.min.css</file>
+        <file>Html/css/index.css</file>
+        <file>Html/css/normalize.css</file>
+        <file>Html/css/skeleton.css</file>
+        <file>Html/js/qwebchannel.js</file>
     </qresource>
 </RCC>

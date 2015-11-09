@@ -35,8 +35,9 @@ int main(int argc, char *argv[])
     MainWindow w;
     Parser parser;
     auto startChannel = Channel::makeChannel();
-    Channel::WebChannel webChannel = startChannel();
+    auto webChannel = startChannel();
     webChannel.channel->registerObject("parser", &parser);
+    w.loadPage(webChannel.url);
 
     std::cout << "WebChannel: " << webChannel.url.toStdString() << std::endl;
 

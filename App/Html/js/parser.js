@@ -59,6 +59,21 @@ functions["loop"] = function(ele){
 
 }
 
+functions["while"] = function(ele){
+  var log_e = ele.children[0]
+                 .children[0]
+                 .children[1];
+  var log = parse(log_e.children)[0];
+  var ctx = parse(ele.children[1].children);
+  return {
+    "type": "while",
+    "conditional": log,
+    "children": ctx
+  }
+
+
+}
+
 functions["if"] = function(ele){
 
   var childs = ele.children[0].children[1].children;
@@ -91,7 +106,7 @@ functions["ifelse"] = function(ele){
 }
 
 functions["mess"] = function(ele){
-  var mess = ele.children[0].children[1];
+  var mess = ele.children[0].children[1].value;
   return {
     "type": "mess",
     "message": mess

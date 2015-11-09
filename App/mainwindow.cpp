@@ -9,6 +9,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    QWebSettings::globalSettings()->setAttribute(QWebSettings::DeveloperExtrasEnabled, true);
 }
 
 MainWindow::~MainWindow()
@@ -16,12 +17,14 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::setPage(const QString &s, const QString &path)
+void MainWindow::loadPage(const QString &channel)
 {
-    QFile file(s);
-    qDebug() << path;
-    file.open(QFile::ReadOnly);
-    QString content = file.readAll();
-    ui->webView->setHtml(content, QUrl(path));
-
+    QUrl url("qrc:/Html/index.html");
+    QString query = "webChannelBaseUrl=" + channel;
+    url.setQuery(query);
+    QString url_s = url.toString();
+    qDebug() << url_s;
+    ui->webView->setUrl(url);
 }
+
+

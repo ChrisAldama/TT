@@ -6,6 +6,21 @@
 
 }
 
+.c-expr {
+	display: block;
+
+}
+
+.c-fun {
+	display: block;
+
+}
+
+.c-con {
+	display: block;
+
+}
+
 .operator {
 	font-size: 18pt;
 	color: #000;

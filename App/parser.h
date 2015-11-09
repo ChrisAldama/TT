@@ -29,6 +29,7 @@ public:
         EXPROP,
         EXPRLOG,
         LOOP,
+        WHILE,
         IF,
         IFELSE,
         MESS,
@@ -51,6 +52,9 @@ public:
         ProgramCounter ins; //Punto de entrada de proximo ctx
         int loop_counter = 0;
         int loop_ceiling = 0;
+        std::string op1_name;
+        std::string op2_name;
+        std::string op_name;
 
     };
 

@@ -9,11 +9,13 @@ Parser::Parser(QObject *parent) : QObject(parent),
     types["expr-op"] = EXPROP;
     types["expr-log"] = EXPRLOG;
     types["loop"] = LOOP;
+    types["while"] = WHILE;
     types["if"] = IF;
     types["ifelse"] = IFELSE;
     types["begin"] = BEGIN;
     types["end"] = END;
     types["no-type"] = NO_TYPE;
+    types["mess"] = MESS;
 
 }
 
@@ -35,7 +37,7 @@ bool Parser::load(const QString &json, bool async)
 
     stack.push_back(begin);
     if(async){
-        timer.start(300);
+        timer.start(1);
     }
     st = RUNNING;
     return true;
@@ -151,11 +153,32 @@ void Parser::tick()
     }
     break;
 
+    case WHILE:{
+        QJsonArray child = inst.value("children").toArray();
+
+        QJsonObject cond_o = inst.value("conditional").toObject();
+        const auto op1_name = cond_o.value("op1").toString("A").toStdString();
+        const auto op_name = cond_o.value("operation").toString("!=").toStdString();
+        const auto op2_name = cond_o.value("op2").toString("A").toStdString();
+        BPoint ctx;
+        ctx.type = WHILE;
+        ctx.ctx = child;
+        ctx.ins = pc;
+        ctx.op1_name = op1_name;
+        ctx.op2_name = op2_name;
+        ctx.op_name = op_name;
+        pc = -1;
+
+        stack.push_back(ctx);
+
+    }
+    break;
+
     case IF:{
         QJsonObject cond_o = inst.value("conditional").toObject();
         auto op1_name = cond_o.value("op1").toString("A").toStdString();
         auto op2_name = cond_o.value("op2").toString("A").toStdString();
-        auto op = cond_o.value("op").toString("==").toStdString();
+        auto op = cond_o.value("operation").toString("==").toStdString();
         QJsonArray childs = inst.value("children").toArray();
 
         Variable op1 = simbols.busca(op1_name);
@@ -182,7 +205,7 @@ void Parser::tick()
         QJsonObject cond_o = inst.value("conditional1").toObject();
         auto op1_name = cond_o.value("op1").toString("A").toStdString();
         auto op2_name = cond_o.value("op2").toString("A").toStdString();
-        auto op = cond_o.value("op").toString("==").toStdString();
+        auto op = cond_o.value("operation").toString("==").toStdString();
 
         Variable op1 = simbols.busca(op1_name);
         if(op1.mi_tipo() == Variable::SinTipo){
@@ -214,6 +237,11 @@ void Parser::tick()
 
     case MESS:{
         QString m = inst.value("message").toString("Hola mundo");
+        Variable var = simbols.busca(m.toStdString());
+        if(var.mi_tipo() == Variable::SinTipo){
+            var = varGuessingType(m);
+        }
+        m = QString::fromStdString(var.valorString());
         message(m);
     }
     break;
@@ -240,6 +268,30 @@ void Parser::tick()
             }
         }
     }
+    else if(ctx.type == WHILE){
+        if(pc >= ctx.ctx.size()){
+            pc = 0;
+        }
+
+        const auto &op1_name = ctx.op1_name;
+        const auto &op_name = ctx.op_name;
+        const auto &op2_name = ctx.op2_name;
+
+        Variable op1 = simbols.busca(op1_name);
+        if(op1.mi_tipo() == Variable::SinTipo){
+            op1 = varGuessingType(op1_name);
+        }
+        Variable op2 = simbols.busca(op2_name);
+        if(op2.mi_tipo() == Variable::SinTipo){
+            op2 = varGuessingType(op2_name);
+        }
+
+        Variable res = op1.operacionPorNombre(op_name, op2);
+        if(res.valorBool() == false){
+            pc = ctx.ins + 1;
+            stack.pop_back();
+        }
+    }
     else if(ctx.type == IF || ctx.type == IFELSE){
         if(pc >= ctx.ctx.size()){
             pc = ctx.ins + 1;
@@ -255,4 +307,6 @@ void Parser::tick()
     }
 
 }
+
+//poner break;
 
