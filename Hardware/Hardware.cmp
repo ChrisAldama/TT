@@ -1,0 +1,241 @@
+Cmp-Mod V01 Created by CvPcb (2013-may-18)-stable date = sáb 17 oct 2015 13:08:25 CDT
+
+BeginCmp
+TimeStamp = /5621AB91;
+Reference = D1;
+ValeurCmp = LED;
+IdModule  = LED-5MM;
+EndCmp
+
+BeginCmp
+TimeStamp = /5622499A;
+Reference = D2;
+ValeurCmp = LED;
+IdModule  = LED-5MM;
+EndCmp
+
+BeginCmp
+TimeStamp = /5622525C;
+Reference = D3;
+ValeurCmp = DIODE;
+IdModule  = D3;
+EndCmp
+
+BeginCmp
+TimeStamp = /5622527A;
+Reference = D4;
+ValeurCmp = DIODE;
+IdModule  = D3;
+EndCmp
+
+BeginCmp
+TimeStamp = /5622524D;
+Reference = D5;
+ValeurCmp = DIODE;
+IdModule  = D3;
+EndCmp
+
+BeginCmp
+TimeStamp = /5622526B;
+Reference = D6;
+ValeurCmp = DIODE;
+IdModule  = D3;
+EndCmp
+
+BeginCmp
+TimeStamp = /56225289;
+Reference = D7;
+ValeurCmp = DIODE;
+IdModule  = D3;
+EndCmp
+
+BeginCmp
+TimeStamp = /562252B6;
+Reference = D8;
+ValeurCmp = DIODE;
+IdModule  = D3;
+EndCmp
+
+BeginCmp
+TimeStamp = /56225298;
+Reference = D9;
+ValeurCmp = DIODE;
+IdModule  = D3;
+EndCmp
+
+BeginCmp
+TimeStamp = /562252A7;
+Reference = D10;
+ValeurCmp = DIODE;
+IdModule  = D3;
+EndCmp
+
+BeginCmp
+TimeStamp = /56225176;
+Reference = IC1;
+ValeurCmp = L293D;
+IdModule  = DIP-16__300;
+EndCmp
+
+BeginCmp
+TimeStamp = /5621B205;
+Reference = P1;
+ValeurCmp = CONNECTOR;
+IdModule  = 1pin;
+EndCmp
+
+BeginCmp
+TimeStamp = /5621B214;
+Reference = P2;
+ValeurCmp = CONNECTOR;
+IdModule  = 1pin;
+EndCmp
+
+BeginCmp
+TimeStamp = /562249A7;
+Reference = P3;
+ValeurCmp = CONNECTOR;
+IdModule  = 1pin;
+EndCmp
+
+BeginCmp
+TimeStamp = /562249AD;
+Reference = P4;
+ValeurCmp = CONNECTOR;
+IdModule  = 1pin;
+EndCmp
+
+BeginCmp
+TimeStamp = /56224A7A;
+Reference = P5;
+ValeurCmp = CONNECTOR;
+IdModule  = 1pin;
+EndCmp
+
+BeginCmp
+TimeStamp = /56224A89;
+Reference = P6;
+ValeurCmp = CONNECTOR;
+IdModule  = 1pin;
+EndCmp
+
+BeginCmp
+TimeStamp = /56224B5F;
+Reference = P7;
+ValeurCmp = CONNECTOR;
+IdModule  = 1pin;
+EndCmp
+
+BeginCmp
+TimeStamp = /56224B65;
+Reference = P8;
+ValeurCmp = CONNECTOR;
+IdModule  = 1pin;
+EndCmp
+
+BeginCmp
+TimeStamp = /562252F2;
+Reference = P9;
+ValeurCmp = CONNECTOR;
+IdModule  = 1pin;
+EndCmp
+
+BeginCmp
+TimeStamp = /562252E3;
+Reference = P10;
+ValeurCmp = CONNECTOR;
+IdModule  = 1pin;
+EndCmp
+
+BeginCmp
+TimeStamp = /562252C5;
+Reference = P11;
+ValeurCmp = CONNECTOR;
+IdModule  = 1pin;
+EndCmp
+
+BeginCmp
+TimeStamp = /562252D4;
+Reference = P12;
+ValeurCmp = CONNECTOR;
+IdModule  = 1pin;
+EndCmp
+
+BeginCmp
+TimeStamp = /56228BA6;
+Reference = P13;
+ValeurCmp = CONNECTOR;
+IdModule  = 1pin;
+EndCmp
+
+BeginCmp
+TimeStamp = /56228BB5;
+Reference = P14;
+ValeurCmp = CONNECTOR;
+IdModule  = 1pin;
+EndCmp
+
+BeginCmp
+TimeStamp = /5622532E;
+Reference = P15;
+ValeurCmp = CONNECTOR;
+IdModule  = 1pin;
+EndCmp
+
+BeginCmp
+TimeStamp = /56225301;
+Reference = P16;
+ValeurCmp = CONNECTOR;
+IdModule  = 1pin;
+EndCmp
+
+BeginCmp
+TimeStamp = /56225310;
+Reference = P17;
+ValeurCmp = CONNECTOR;
+IdModule  = 1pin;
+EndCmp
+
+BeginCmp
+TimeStamp = /5622531F;
+Reference = P18;
+ValeurCmp = CONNECTOR;
+IdModule  = 1pin;
+EndCmp
+
+BeginCmp
+TimeStamp = /5621ADDE;
+Reference = R1;
+ValeurCmp = R;
+IdModule  = R3;
+EndCmp
+
+BeginCmp
+TimeStamp = /562249A0;
+Reference = R2;
+ValeurCmp = R;
+IdModule  = R3;
+EndCmp
+
+BeginCmp
+TimeStamp = /56228B9E;
+Reference = R3;
+ValeurCmp = R;
+IdModule  = R3;
+EndCmp
+
+BeginCmp
+TimeStamp = /56224ACA;
+Reference = SW1;
+ValeurCmp = SW_PUSH;
+IdModule  = R3;
+EndCmp
+
+BeginCmp
+TimeStamp = /56224B6B;
+Reference = SW2;
+ValeurCmp = SW_PUSH;
+IdModule  = R3;
+EndCmp
+
+EndListe

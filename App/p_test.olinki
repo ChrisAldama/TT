@@ -1,0 +1,42 @@
+[
+    {
+        "type": "begin"
+    },
+    {
+        "type": "asig",
+        "var": "var",
+        "value": "0"
+    },
+    {
+        "type": "loop",
+        "times": "10",
+        "children": [
+            {
+                "type": "expr-op",
+                "var": "var",
+                "op1": "var",
+                "operation": "+",
+                "op2": "1"
+            }
+        ]
+    },
+    {
+        "type": "if",
+        "conditional": {
+            "type": "expr-log",
+            "op1": "var",
+            "operation": "==",
+            "op2": "10"
+        },
+        "children": [
+            {
+                "type": "asig",
+                "var": "var",
+                "value": "hola"
+            }
+        ]
+    },
+    {
+        "type": "end"
+    }
+]

@@ -1,0 +1,165 @@
+#program {
+	border-color: #888;
+	border-width: 3px;
+	border-style: dashed;
+	height: 800px;
+
+}
+
+.operator {
+	font-size: 18pt;
+	color: #000;
+}
+
+.p-bloque {
+	width: 280px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 10px;
+   cursor: pointer;
+}
+
+.p-inicio {
+	background-color: #006680;
+	border-radius: 100px 100px 5px 5px;
+	text-align: center;
+}
+
+.p-fin {
+	background-color: #006680;
+	border-radius: 5px 5px 100px 100px ;
+	text-align: center;
+}
+
+.l-inicio {
+	    color: #e9ddaf;
+		font-size: 28pt;
+		margin-left: auto;
+		margin-right: auto;
+		text-align: center;
+}
+
+.p-repetir-sup {
+	background-color: #f88000;
+	border-radius: 5px 5px 5px 0px;
+	color: #FFF;
+	font-size: 14pt;
+}
+
+.p-repetir-mid {
+	border-left: 4px  solid #f88000;
+
+}
+
+.p-repetir-inf {
+	border-left: 4px  solid #f88000;
+	border-bottom:  10px  solid #f88000;
+	border-radius: 0 5px 5px 5px;
+    height: 5px;
+}
+
+.p-si-sup {
+	background-color: #008080;
+	border-radius: 5px 5px 5px 0px;
+	color: #FFF;
+	font-size: 14pt;
+}
+
+.p-si-mid {
+	border-left: 4px  solid #008080;
+
+}
+
+.p-si-inf {
+	border-left: 4px  solid #008080;
+	border-bottom:  10px  solid #008080;
+	border-radius: 0 5px 5px 5px;
+    height: 5px;
+}
+
+.p-sino-sup {
+	background-color: #6f6f91;
+	border-radius: 5px 5px 5px 0px;
+	color: #FFF;
+	font-size: 14pt;
+}
+
+.p-sino-sup-mid {
+	background-color: #6f6f91;
+	border-radius: 0px 5px 5px 0px;
+	color: #FFF;
+	font-size: 14pt;
+}
+
+.p-sino-mid {
+	border-left: 4px  solid #6f6f91;
+
+}
+
+.p-sino-inf {
+	border-left: 4px  solid #6f6f91;
+	border-bottom:  10px  solid #6f6f91;
+	border-radius: 0 5px 5px 5px;
+    height: 5px;
+}
+
+.p-expr {
+	background-color: #aad400;
+	height: 45px;
+	border-radius: 7px;
+}
+
+.p-expr-log {
+	background-color: #7c916f;
+	height: 43px;
+	border-radius: 7px;
+	width: 220px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 5px;
+   cursor: pointer;
+}
+
+.p-expr-in {
+	margin-left: 8px;
+	margin-right: auto;
+
+}
+
+.p-log-lab{
+	margin-left: 20px;
+}
+
+.p-log{
+	background-color: #fff;
+	width: 220px;
+	height: 50px;
+	margin: 5px 0px 5px 35px;
+	border-radius: 7px;
+
+}
+
+.p-repetir-input {
+	width: 120px;
+	color: #000;
+}
+
+.p-min-input {
+	width: 60px;
+	color: #000;
+}
+
+.p-min-min-input {
+	width: 55px;
+	color: #000;
+}
+
+.m_menu{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.m_menu_item {
+    display: inline;
+}

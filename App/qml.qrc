@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>p_test.olinki</file>
+        <file>p_test_sino.olinki</file>
+    </qresource>
+</RCC>

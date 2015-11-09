@@ -1,0 +1,36 @@
+[
+    {
+        "type": "begin"
+    },
+    {
+        "type": "asig",
+        "var": "var",
+        "value": "Verdadero"
+    },
+    {
+        "type": "ifelse",
+        "conditional1": {
+            "type": "expr-log",
+            "op1": "var",
+            "operation": "==",
+            "op2": "Falso"
+        },
+        "children1": [
+            {
+                "type": "asig",
+                "var": "var",
+                "value": "nop"
+            }
+        ],
+        "children2": [
+            {
+                "type": "asig",
+                "var": "var",
+                "value": "hola"
+            }
+        ]
+    },
+    {
+        "type": "end"
+    }
+]

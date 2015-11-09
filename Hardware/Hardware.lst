@@ -1,0 +1,76 @@
+eeschema (2013-may-18)-stable  >> Creation date: sáb 17 oct 2015 13:06:32 CDT
+#Cmp ( order = Reference )
+| D1         LED         
+| D2         LED         
+| D3         DIODE       
+| D4         DIODE       
+| D5         DIODE       
+| D6         DIODE       
+| D7         DIODE       
+| D8         DIODE       
+| D9         DIODE       
+| D10        DIODE       
+| IC1        L293D       
+| P1         CONNECTOR   
+| P2         CONNECTOR   
+| P3         CONNECTOR   
+| P4         CONNECTOR   
+| P5         CONNECTOR   
+| P6         CONNECTOR   
+| P7         CONNECTOR   
+| P8         CONNECTOR   
+| P9         CONNECTOR   
+| P10        CONNECTOR   
+| P11        CONNECTOR   
+| P12        CONNECTOR   
+| P13        CONNECTOR   
+| P14        CONNECTOR   
+| P15        CONNECTOR   
+| P16        CONNECTOR   
+| P17        CONNECTOR   
+| P18        CONNECTOR   
+| R1         R           
+| R2         R           
+| R3         R           
+| SW1        SW_PUSH     
+| SW2        SW_PUSH     
+#End Cmp
+
+#Cmp ( order = Value )
+| LED          D1        
+| LED          D2        
+| DIODE        D3        
+| DIODE        D4        
+| DIODE        D5        
+| DIODE        D6        
+| DIODE        D7        
+| DIODE        D8        
+| DIODE        D9        
+| DIODE        D10       
+| L293D        IC1       
+| CONNECTOR    P1        
+| CONNECTOR    P2        
+| CONNECTOR    P3        
+| CONNECTOR    P4        
+| CONNECTOR    P5        
+| CONNECTOR    P6        
+| CONNECTOR    P7        
+| CONNECTOR    P8        
+| CONNECTOR    P9        
+| CONNECTOR    P10       
+| CONNECTOR    P11       
+| CONNECTOR    P12       
+| CONNECTOR    P13       
+| CONNECTOR    P14       
+| CONNECTOR    P15       
+| CONNECTOR    P16       
+| CONNECTOR    P17       
+| CONNECTOR    P18       
+| R            R1        
+| R            R2        
+| R            R3        
+| SW_PUSH      SW1       
+| SW_PUSH      SW2       
+#End Cmp
+
+#End List

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Olinki</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="http://fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/skeleton.css">
+  <link href="node_modules/dragula/dist/dragula.css" rel="stylesheet" type="text/css">
+  <link href="css/index.css" rel="stylesheet" type="text/css">
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="images/favicon.png">
+
+</head>
+<body>
+
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <div class="container">
+    <div class="row">
+      <div class="one-third column">
+        <h4>Bloques</h4>
+        <p>Arrastra los bloques hacia la derecha para construir el programa</p>
+        <!-- Bloques de Programa -->
+        <div id="blocks" class="blocks">
+         <h5 class="label">Expresiones</h5>
+         <!-- Bloque Asignacion -->
+         <div id = "exp-igual" class="p-bloque p-expr" tipo="asig">
+           <div id ="exp-igual-cont"  class="p-expr-in">
+             <input type="text" class="p-repetir-input">
+            <a class="operator"> =</a>
+             <input type="text" class="p-repetir-input">
+           </div>
+           </div>
+           <!-- Bloque de Operacion -->
+           <div id = "exp-op" class="p-bloque p-expr" tipo="expr-op">
+            <div id = "exp-op-cont" class="p-expr-in">
+               <input type="text" class="p-min-input">
+              <a class="operator"> =</a>
+              <input type="text" class="p-min-input">
+              <select class="p-min-min-input">
+                 <option class="operation">+</option>
+                <option class="operation">-</option>
+                <option class="operation">x</option>
+                <option class="operation">/</option>
+                </select>
+                <input type="text" class="p-min-input">
+            </div>
+           </div>
+           <h5>Lógica</h5>
+           <!-- Bloque Lógica -->
+           <div id = "exp-logic" class="p-expr-log" tipo="expr-log">
+           <div id = "exp-logic-cont" class="p-expr-in">
+             <input type="text" class="p-min-input">
+             <select class="p-min-input">
+               <option class="operation">&gt;</option>
+               <option class="operation">&gt;=</option>
+               <option class="operation">&lt;</option>
+               <option class="operation">&lt;=</option>
+                <option class="operation">==</option>
+                <option class="operation">!=</option>
+               </select>
+               <input type="text" class="p-min-input">
+           </div>
+           </div>
+
+
+          <h5 class="label">Condicionales</h5>
+          <!-- Bloque Repetir -->
+         <div id = "exp-otravez" class="p-bloque p-repetir" tipo="loop">
+             <div id = "exp-otravez-arriba" class="p-repetir-sup">
+               <div id = "exp-otravez-estilo" style="margin-left:5px;">
+               Repetir: <input type="number" min="0" class="p-repetir-input">
+               </div>
+            </div>
+            <div id = "exp-otravez-medio" class="p-repetir-mid"><br><br></div>
+            <div id = "exp-otravez-abajo" class="p-repetir-inf"></div>
+          </div>
+          <!-- Bloque Si -->
+          <div class="p-bloque p-si" tipo="if">
+             <div id = "exp-si-arriba" class="p-si-sup row">
+               <div style="margin-left:5px;" class="p-log-lab one column">
+               Si
+               </div>
+               <div id = "exp-si-caja" class="p-log  column p-logica">
+                 <div id = "exp-logic" class="p-expr-log" tipo="expr-log">
+                 <div id = "exp-logic-cont" class="p-expr-in">
+                   <input type="text" class="p-min-input">
+                   <select class="p-min-input">
+                     <option class="operation">&gt;</option>
+                     <option class="operation">&gt;=</option>
+                     <option class="operation">&lt;</option>
+                     <option class="operation">&lt;=</option>
+                      <option class="operation">==</option>
+                      <option class="operation">!=</option>
+                     </select>
+                     <input type="text" class="p-min-input">
+                 </div>
+                 </div>
+                </div>
+            </div>
+            <div id = "exp-si-medio" class="p-si-mid"><br><br></div>
+            <div id = "exp-si-abajo" class="p-si-inf"></div>
+          </div>
+          <!-- Bloque SiNo -->
+           <div class="p-bloque p-sino" tipo="ifelse">
+             <div id = "exp-sino-si-arriba" class="p-sino-sup row">
+               <div style="margin-left:5px;" class="p-log-lab one column">
+               Si
+               </div>
+               <div class="p-log  column">
+                 <div id = "exp-logic" class="p-expr-log" tipo="expr-log">
+                 <div id = "exp-logic-cont" class="p-expr-in">
+                   <input type="text" class="p-min-input">
+                   <select class="p-min-input">
+                     <option class="operation">&gt;</option>
+                     <option class="operation">&gt;=</option>
+                     <option class="operation">&lt;</option>
+                     <option class="operation">&lt;=</option>
+                      <option class="operation">==</option>
+                      <option class="operation">!=</option>
+                     </select>
+                     <input type="text" class="p-min-input">
+                 </div>
+                 </div>
+                </div>
+            </div>
+            <div id = "exp-sino-arriba-med1" class="p-sino-mid p-sino-mid-1"><br><br></div>
+            <div id = "exp-sino-medio" class="p-sino-sup-mid row">
+               <div style="margin-left:5px;" class="p-log-lab one column">
+               SiNo
+               </div>
+
+            </div>
+            <div id = "exp-sino-arriba-med2" class="p-sino-mid p-sino-mid-2"><br><br></div>
+            <div id = "exp-sino-abajo" class="p-sino-inf"></div>
+          </div>
+        </div>
+
+        <h5 class="label">Funciones</h5>
+        <!-- Mensajes -->
+        <div id = "exp-igual" class="p-bloque p-expr" tipo="mess">
+          <div id ="exp-igual-cont"  class="p-expr-in">
+            Mensaje
+           <a class="operator"> <=</a>
+            <input type="text" class="p-repetir-input">
+          </div>
+          </div>
+
+
+        </div>
+      <div class="two-thirds column" id="programa-view">
+        <ul class="m_menu">
+          <li class="m_menu_item">Programa</li>
+          <li class="m_menu_item"><a onclick="arranca();">Arranca</a></li>
+          <li class="m_menu_item"><a onclick="detiene();">Detiene</a></li>
+       </ul>
+        <!-- Prgrama -->
+        <div id="program" class="program">
+          <!-- Bloque de Inicio -->
+          <div class="p-bloque p-inicio" tipo="begin">
+            <a class="l-inicio">Inicio</a>
+          </div>
+          <!-- Bloque Fin -->
+          <div class="p-bloque p-fin" tipo="end">
+            <a class="l-inicio">Fin</a>
+          </div>
+        </div>
+        <!-- Fin de Programa -->
+      </div>
+    </div>
+  </div>
+
+
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <!-- Scripts -->
+  <script src="node_modules/dragula/dist/dragula.js"></script>
+  <script src="js/index.js"></script>
+  <script src="js/parser.js"></script>
+  <script src="js/socket.js"></script>
+    <!-- Conversion Json -->
+<script type="text/javascript">
+
+function arranca(){
+    var r = parse(document.getElementById("program").children);
+    console.log(JSON.stringify(r));
+    WebChannel.sendProgram(JSON.stringify(r), function(){
+      console.log("running");
+    });
+}
+
+function detiene(){
+  WebChannel.stopProgram();
+}
+
+</script>
+</body>
+</html>
