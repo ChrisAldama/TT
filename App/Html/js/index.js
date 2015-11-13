@@ -48,11 +48,11 @@
   });
 
 
-/*dragula([programa], {
+dragula([programa], {
      removeOnSpill: true,
      moves: dontMove
 
-});*/
+});
 
 function dontMove(el, container, handle)
 {

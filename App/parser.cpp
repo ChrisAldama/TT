@@ -104,7 +104,10 @@ void Parser::tick()
         QJsonValue value_jvalue = inst.value("value");
         QString var_name = var_jvalue.toString("A");
         QString var_value = value_jvalue.toString("0");
-        Variable var = varGuessingType(var_value);
+        Variable var = simbols.busca(var_value.toStdString());
+        if(var.mi_tipo() == Variable::SinTipo){
+            var = varGuessingType(var_value);
+        }
         simbols.actuliazaCrea(var_name.toStdString(),
                               var);
 
