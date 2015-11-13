@@ -1,5 +1,5 @@
 TEMPLATE = app
-CONFIG += c++11
+QMAKE_CXXFLAGS += -std=gnu++0x
 
 QT += widgets webkitwidgets
 

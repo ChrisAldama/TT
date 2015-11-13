@@ -1,8 +1,8 @@
 #include "comm.h"
 #include <unistd.h>
 #include <fcntl.h>
-#include <linux/i2c-dev.h>
-#include <sys/ioctl.h>
+//#include <linux/i2c-dev.h>
+//#include <sys/ioctl.h>
 
 
 Comm::Comm(QObject *parent) : QObject(parent)
@@ -10,7 +10,7 @@ Comm::Comm(QObject *parent) : QObject(parent)
 
 }
 
-u_int8_t Comm::poll(const SMess mess)
+uint8_t Comm::poll(const SMess mess)
 {
     /*const u_int8_t *data = (u_int8_t*)(&mess);
     const size_t size = sizeof(mess);
@@ -35,7 +35,7 @@ Comm::Comm(const QString &i2cDevice, int idx)
 
 void Comm::openDevice(const QString &msg, int addr)
 {
-    if(fd > 0){
+    /*if(fd > 0){
         close(fd);
     }
     const char *file = msg.toLocal8Bit().data();
@@ -48,6 +48,6 @@ void Comm::openDevice(const QString &msg, int addr)
         close(fd);
         fd = -1;
         error("Falló ioctl: " + msg);
-    }
+    }*/
 }
 

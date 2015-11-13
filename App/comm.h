@@ -18,9 +18,9 @@ class Comm : public QObject
     };
 
     struct SMess {
-        u_int8_t sensor: 5,
+        uint8_t sensor: 5,
                  idx: 3;
-        u_int8_t val;
+        uint8_t val;
     };
 
 
@@ -28,7 +28,7 @@ public:
     explicit Comm(QObject *parent = 0);
     Comm(const QString &i2cDevice, int idx);
 
-    u_int8_t poll(const SMess mess);
+    uint8_t poll(const SMess mess);
 
 
 signals:

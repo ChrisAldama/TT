@@ -14,10 +14,12 @@
               return false;
             }
           }
-          else {
-
-            //return false;
+          else{
+            if(target.className.indexOf("program") !== -1){
+              return false;
+            }
           }
+
 
           return true;
       },
@@ -48,7 +50,7 @@
   });
 
 
-dragula([programa], {
+dragula([programa, programa], {
      removeOnSpill: true,
      moves: dontMove
 

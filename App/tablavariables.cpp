@@ -79,7 +79,7 @@ Variable TablaVariables::busca(const std::string &nombre, bool &exito)
     return result;
 }
 
-std::map<std::__cxx11::string, Variable> TablaVariables::raw()
+std::map<std::string, Variable> TablaVariables::raw()
 {
     return misVariables;
 }
