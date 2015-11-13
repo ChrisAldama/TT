@@ -3,6 +3,9 @@
 #include <QUrl>
 #include <QFile>
 #include <QDebug>
+#include <QWebPage>
+#include <QWebFrame>
+#include <assert.h>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -17,14 +20,21 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::loadPage(const QString &channel)
+void MainWindow::loadPage()
 {
     QUrl url("qrc:/Html/index.html");
-    QString query = "webChannelBaseUrl=" + channel;
-    url.setQuery(query);
-    QString url_s = url.toString();
-    qDebug() << url_s;
     ui->webView->setUrl(url);
+}
+
+void MainWindow::registerObjectInJs(const QString &name, QObject *obj)
+{
+    QWebFrame *frame =  ui->webView->page()->mainFrame();
+
+    auto f = [=](){
+        frame->addToJavaScriptWindowObject(name, obj, QWebFrame::QtOwnership);
+    };
+    f();
+    connect(frame, &QWebFrame::javaScriptWindowObjectCleared,f);
 }
 
 

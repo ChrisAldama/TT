@@ -3,7 +3,6 @@
 #include<QDebug>
 #include<iostream>
 #include"mainwindow.h"
-#include"channel.h"
 #include "parser.h"
 
 //#define TEST
@@ -34,12 +33,8 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
     MainWindow w;
     Parser parser;
-    auto startChannel = Channel::makeChannel();
-    auto webChannel = startChannel();
-    webChannel.channel->registerObject("parser", &parser);
-    w.loadPage(webChannel.url);
-
-    std::cout << "WebChannel: " << webChannel.url.toStdString() << std::endl;
+    w.loadPage();
+    w.registerObjectInJs("parser", &parser);
 
     w.show();
     return app.exec();

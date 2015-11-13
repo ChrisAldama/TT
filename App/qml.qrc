@@ -15,5 +15,6 @@
         <file>Html/css/normalize.css</file>
         <file>Html/css/skeleton.css</file>
         <file>Html/js/qwebchannel.js</file>
+        <file>Html/js/qt.js</file>
     </qresource>
 </RCC>

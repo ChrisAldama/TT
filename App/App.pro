@@ -1,13 +1,10 @@
 TEMPLATE = app
 CONFIG += c++11
 
-QT += widgets webkitwidgets webchannel websockets network
+QT += widgets webkitwidgets
 
 SOURCES += main.cpp \
     mainwindow.cpp \
-    websocketclientwrapper.cpp \
-    websockettransport.cpp \
-    channel.cpp \
     parser.cpp \
     variable.cpp \
     tablavariables.cpp \
@@ -27,9 +24,6 @@ FORMS += \
 
 HEADERS += \
     mainwindow.h \
-    websocketclientwrapper.h \
-    websockettransport.h \
-    channel.h \
     parser.h \
     variable.h \
     tablavariables.h \
