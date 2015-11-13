@@ -11,7 +11,8 @@ SOURCES += main.cpp \
     parser.cpp \
     variable.cpp \
     tablavariables.cpp \
-    test.cpp
+    test.cpp \
+    comm.cpp
 
 RESOURCES += qml.qrc
 
@@ -32,7 +33,8 @@ HEADERS += \
     parser.h \
     variable.h \
     tablavariables.h \
-    test.h
+    test.h \
+    comm.h
 
 DISTFILES += \
     p_test.olinki \

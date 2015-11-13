@@ -48,6 +48,8 @@ var WebChannel = {
       console.log("Connected");
       WebChannel.qt = channel;
       channel.objects.parser.message.connect(function (m){
+        var c = document.getElementById("consola");
+        c.innerHTML += "<p>" + m + "</p>";
         console.log(m);
       });
     });

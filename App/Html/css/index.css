@@ -2,7 +2,15 @@
 	border-color: #888;
 	border-width: 3px;
 	border-style: dashed;
-	height: 800px;
+	height: 1600px;
+
+}
+
+#consola {
+	border-color: #888;
+	border-width: 3px;
+	border-style: dashed;
+	height: 600px;
 
 }
 
@@ -17,6 +25,11 @@
 }
 
 .c-con {
+	display: block;
+
+}
+
+.c-cons {
 	display: block;
 
 }
