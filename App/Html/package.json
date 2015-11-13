@@ -9,6 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "dragula": "^3.0.3"
+    "dragula": "~3.5.4"
   }
 }

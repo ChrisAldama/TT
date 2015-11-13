@@ -1,6 +1,6 @@
 [![logo.png][3]][2]
 
-[![Travis CI][5]][4] [![Flattr][6]][7]
+[![Travis CI][5]][4] [![Slack Status][17]][18] [![Flattr][6]][7] [![Patreon][19]][20]
 
 > Drag and drop so simple it hurts
 
@@ -28,6 +28,7 @@ Have you ever wanted a drag and drop library that just works? That doesn't just 
 - **Figures out sort order** on its own
 - A shadow where the item would be dropped offers **visual feedback**
 - Touch events!
+- Seamlessly handles clicks *without any configuration*
 
 # Install
 
@@ -37,10 +38,22 @@ You can get it on npm.
 npm install dragula --save
 ```
 
-Or bower, too. <sub>_(note that it's called `dragula.js` in bower)_</sub>
+Or bower, too.
 
 ```shell
-bower install dragula.js --save
+bower install dragula --save
+```
+
+If you're not using either package manager, you can use `dragula` by downloading the [files in the `dist` folder][15]. We **strongly suggest** using `npm`, though.
+
+##### Including the CSS!
+
+There's [a few CSS styles][16] you need to incorporate in order for `dragula` to work as expected.
+
+You can add them by including [`dist/dragula.css`][12] or [`dist/dragula.min.css`][13] in your document. If you're using Stylus, you can include the styles using the directive below.
+
+```styl
+@import 'node_modules/dragula/dragula'
 ```
 
 # Usage
@@ -66,20 +79,22 @@ dragula(containers, {
   isContainer: function (el) {
     return false; // only elements in drake.containers will be taken into account
   },
-  moves: function (el, source, handle) {
+  moves: function (el, source, handle, sibling) {
     return true; // elements are always draggable by default
   },
   accepts: function (el, target, source, sibling) {
     return true; // elements can be dropped in any of the `containers` by default
   },
-  invalid: function (el, target) { // don't prevent any drags from initiating by default
-    return false;
+  invalid: function (el, target) {
+    return false; // don't prevent any drags from initiating by default
   },
-  direction: 'vertical',         // Y axis is considered when determining where an element would be dropped
-  copy: false,                   // elements are moved by default, not copied
-  revertOnSpill: false,          // spilling will put the element back where it was dragged from, if this is true
-  removeOnSpill: false,          // spilling will `.remove` the element, if this is true
-  mirrorContainer: document.body // set the element that gets mirror elements appended
+  direction: 'vertical',             // Y axis is considered when determining where an element would be dropped
+  copy: false,                       // elements are moved by default, not copied
+  copySortSource: false,             // elements in copy-source containers can be reordered
+  revertOnSpill: false,              // spilling will put the element back where it was dragged from, if this is true
+  removeOnSpill: false,              // spilling will `.remove` the element, if this is true
+  mirrorContainer: document.body,    // set the element that gets mirror elements appended
+  ignoreInputTextSelection: true     // allows users to select input text, see details below
 });
 ```
 
@@ -126,7 +141,7 @@ var drake = dragula({
 
 #### `options.moves`
 
-You can define a `moves` method which will be invoked with `(el, source, handle)` whenever an element is clicked. If this method returns `false`, a drag event won't begin, and the event won't be prevented either. The `handle` element will be the original click target, which comes in handy to test if that element is an expected _"drag handle"_.
+You can define a `moves` method which will be invoked with `(el, source, handle, sibling)` whenever an element is clicked. If this method returns `false`, a drag event won't begin, and the event won't be prevented either. The `handle` element will be the original click target, which comes in handy to test if that element is an expected _"drag handle"_.
 
 #### `options.accepts`
 
@@ -136,7 +151,7 @@ Also note that **the position where a drag starts is always going to be a valid 
 
 #### `options.copy`
 
-If `copy` is set to `true`, items will be copied rather than moved. This implies the following differences:
+If `copy` is set to `true` _(or a method that returns `true`)_, items will be copied rather than moved. This implies the following differences:
 
 Event     | Move                                     | Copy
 ----------|------------------------------------------|---------------------------------------------
@@ -144,6 +159,22 @@ Event     | Move                                     | Copy
 `drop`    | Element will be moved into `target`      | Element will be cloned into `target`
 `remove`  | Element will be removed from DOM         | Nothing happens
 `cancel`  | Element will stay in `source`            | Nothing happens
+
+If a method is passed, it'll be called whenever an element starts being dragged in order to decide whether it should follow `copy` behavior or not. Consider the following example.
+
+```js
+copy: function (el, source) {
+  return el.className === 'you-may-copy-us';
+}
+```
+#### `options.copySortSource`
+
+If `copy` is set to `true` _(or a method that returns `true`)_ and `copySortSource` is `true` as well, users will be able to sort elements in `copy`-source containers.
+
+```js
+copy: true,
+copySortSource: true
+```
 
 #### `options.revertOnSpill`
 
@@ -180,6 +211,12 @@ invalid: function (el) {
 #### `options.mirrorContainer`
 
 The DOM element where the mirror element displayed while dragging will be appended to. Defaults to `document.body`.
+
+#### `options.ignoreInputTextSelection`
+
+When this option is enabled, if the user clicks on an input element the drag won't start until their mouse pointer exits the input. This translates into the user being able to select text in inputs contained inside draggable elements, and still drag the element by moving their mouse outside of the input -- so you get the best of both worlds.
+
+This option is enabled by default. Turn it off by setting it to `false`. If its disabled your users won't be able to select text in inputs within `dragula` containers with their mouse.
 
 ## API
 
@@ -218,17 +255,17 @@ If an element managed by `drake` is currently being dragged, this method will gr
 
 The `drake` is an event emitter. The following events can be tracked using `drake.on(type, listener)`:
 
-Event Name | Listener Arguments      | Event Description
------------|-------------------------|-------------------------------------------------------------------------------------
-`drag`     | `el, source`            | `el` was lifted from `source`
-`dragend`  | `el`                    | Dragging event for `el` ended with either `cancel`, `remove`, or `drop`
-`drop`     | `el, target, source`    | `el` was dropped into `target`, and originally came from `source`
-`cancel`   | `el, source`         | `el` was being dragged but it got nowhere and went back into `source`, its last stable parent
-`remove`   | `el, container`         | `el` was being dragged but it got nowhere and it was removed from the DOM. Its last stable parent was `container`.
-`shadow`   | `el, container`         | `el`, _the visual aid shadow_, was moved into `container`. May trigger many times as the position of `el` changes, even within the same `container`
-`cloned`   | `clone, original, type` | DOM element `original` was cloned as `clone`, of `type` _(`'mirror'` or `'copy'`)_. Fired for mirror images and when `copy: true`
-`over`     | `el, container, source` | `el` is over `container`, and originally came from `source`
-`out`      | `el, container, source` | `el` was dragged out of `container` or dropped, and originally came from `source`
+Event Name | Listener Arguments               | Event Description
+-----------|----------------------------------|-------------------------------------------------------------------------------------
+`drag`     | `el, source`                     | `el` was lifted from `source`
+`dragend`  | `el`                             | Dragging event for `el` ended with either `cancel`, `remove`, or `drop`
+`drop`     | `el, target, source, sibling`    | `el` was dropped into `target` before a `sibling` element, and originally came from `source`
+`cancel`   | `el, container, source`          | `el` was being dragged but it got nowhere and went back into `container`, its last stable parent; `el` originally came from `source`
+`remove`   | `el, container, source`          | `el` was being dragged but it got nowhere and it was removed from the DOM. Its last stable parent was `container`, and originally came from `source`
+`shadow`   | `el, container, source`          | `el`, _the visual aid shadow_, was moved into `container`. May trigger many times as the position of `el` changes, even within the same `container`; `el` originally came from `source`
+`over`     | `el, container, source`          | `el` is over `container`, and originally came from `source`
+`out`      | `el, container, source`          | `el` was dragged out of `container` or dropped, and originally came from `source`
+`cloned`   | `clone, original, type`          | DOM element `original` was cloned as `clone`, of `type` _(`'mirror'` or `'copy'`)_. Fired for mirror images and when `copy: true`
 
 #### `drake.destroy()`
 
@@ -243,11 +280,13 @@ Dragula uses only four CSS classes. Their purpose is quickly explained below, bu
 - `gu-mirror` is added to the mirror image. It handles fixed positioning and `z-index` _(and removes any prior margins on the element)_. Note that the mirror image is appended to the `mirrorContainer`, not to its initial container. Keep that in mind when styling your elements with nested rules, like `.list .item { padding: 10px; }`.
 - `gu-hide` is a helper class to apply `display: none` to an element.
 
-Note that these rules must be available to your document. You can do so by  including [`dist/dragula.css`][12] or [`dist/dragula.min.css`][13] in your document. You could also include their content in your own stylesheet, in order to reduce HTTP requests.
-
 # Contributing
 
 See [contributing.markdown][14] for details.
+
+# Support
+
+There's now a dedicated support channel in Slack. Visit the `dragula` [demo page][2] to get an invite. Support requests won't be handled through the repository anymore.
 
 # License
 
@@ -267,3 +306,9 @@ MIT
 [12]: https://github.com/bevacqua/dragula/blob/master/dist/dragula.css
 [13]: https://github.com/bevacqua/dragula/blob/master/dist/dragula.min.css
 [14]: https://github.com/bevacqua/dragula/blob/master/contributing.markdown
+[15]: https://github.com/bevacqua/dragula/blob/master/dist
+[16]: #css
+[17]: https://dragula-slackin.herokuapp.com/badge.svg
+[18]: https://bevacqua.github.io/dragula/
+[19]: https://rawgit.com/bevacqua/dragula/master/resources/patreon.svg
+[20]: https://patreon.com/bevacqua
