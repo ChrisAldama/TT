@@ -2,8 +2,10 @@
 #include<QString>
 #include<QDebug>
 #include<iostream>
+#include <memory>
 #include"mainwindow.h"
 #include "parser.h"
+#include "comm.h"
 
 //#define TEST
 
@@ -32,7 +34,8 @@ int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
     MainWindow w;
-    Parser parser;
+    std::unique_ptr<Comm> c(new Comm);
+    Parser parser(c.get());
     w.loadPage();
     w.registerObjectInJs("parser", &parser);
 

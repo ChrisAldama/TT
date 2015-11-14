@@ -114,6 +114,87 @@ functions["mess"] = function(ele){
   };
 }
 
+functions["delay"] = function(ele){
+  var mess = ele.children[0].children[1].value;
+  return {
+    "type": "delay",
+    "delay": mess
+
+  };
+}
+
+functions["led"] = function(ele){
+    var led = ele.children[0].children[0];
+    var led_v = led.options[led.selectedIndex].value;
+    var vari = ele.children[0].children[2].value;
+        
+    return {
+      "type": "led",
+      "led": led_v,
+      "op": vari  
+    };    
+}
+
+functions["lede"] = function(ele){
+    var led1 = ele.children[0].children[0];
+    var led_v1 = led1.options[led1.selectedIndex].value;
+    
+    var led2 = ele.children[0].children[2];
+    var led_v2 = led2.options[led2.selectedIndex].value;
+    
+    return {
+      "type": "led",
+      "led": led_v1,
+      "op": led_v2  
+    };    
+}
+
+functions["motor"] = function(ele){
+    var led1 = ele.children[0].children[0];
+    var led_v1 = led1.options[led1.selectedIndex].value;
+    
+    var led2 = ele.children[0].children[2];
+    var led_v2 = led2.options[led2.selectedIndex].value;
+    
+    return {
+      "type": "motor",
+      "motor": led_v1,
+      "op": led_v2  
+    }; 
+    
+}
+
+functions["boton"] = function(ele){
+    var led = ele.children[0].children[2];
+    var led_v = led.options[led.selectedIndex].value;
+    var vari = ele.children[0].children[0].value;
+        
+    return {
+      "type": "boton",
+      "boton": led_v,
+      "op": vari  
+    };    
+}
+
+functions["temp"] = function(ele){
+
+    var vari = ele.children[0].children[0].value;
+        
+    return {
+      "type": "temp",
+      "op": vari  
+    };    
+}
+
+functions["analog"] = function(ele){
+    var vari = ele.children[0].children[0].value;
+        
+    return {
+      "type": "analog",
+      "op": vari  
+    };    
+}
+
 functions["begin"] = function(ele){
     return {"type":"begin"};
 }

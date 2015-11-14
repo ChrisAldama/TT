@@ -27,6 +27,10 @@
   });
   drake.on("drop", function(el, target ,source){
       //console.log(target.innerHTML);
+      var className = el.className;
+      var reg = new RegExp("\\sc-.*\\s");
+      var c = className.replace(reg, " ");
+      el.className = c;
 
       if(el.className.indexOf("p-repetir") !== -1){
           var mid = getChildByClassName(el, "p-repetir-mid");

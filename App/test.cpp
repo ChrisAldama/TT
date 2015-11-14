@@ -1,5 +1,6 @@
 #include "test.h"
 #include "parser.h"
+#include "comm.h"
 #include <QString>
 #include <QFile>
 #include <QDebug>
@@ -20,7 +21,8 @@ bool Test::progam(const QString &filename)
     prog.open(QFile::ReadOnly);
     QString json = prog.readAll();
     prog.close();
-    Parser parser;
+    Comm c;
+    Parser parser(&c);
     parser.load(json, false);
     while(parser.state() == Parser::RUNNING){
         parser.tick();

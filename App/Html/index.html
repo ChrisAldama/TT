@@ -45,12 +45,92 @@
           </h5>
           <!-- Mensajes -->
           <div id = "exp-mess" class="p-bloque p-expr c-fun" tipo="mess">
-            <div id ="exp-igual-cont"  class="p-expr-in">
+            <div id ="exp-igual-cont-m"  class="p-expr-in">
               Mensaje
-             <a class="operator"> <=</a>
+             <a class="operator"> =</a>
               <input type="text" class="p-repetir-input">
             </div>
             </div>
+            <!-- ESPERA -->
+            <div id = "exp-sl" class="p-bloque p-expr c-fun" tipo="delay">
+            <div id ="exp-igual-cont-sl"  class="p-expr-in">
+              Espera
+             <a class="operator"> =</a>
+              <input type="text" class="p-repetir-input">
+            </div>
+            </div>
+            <!-- LED -->
+           <div id = "led" class="p-bloque p-expr c-fun" tipo="led">
+           <div id ="exp-igual-cont-l"  class="p-expr-in">
+             <select class="">
+                 <option class="operation">led1</option>
+                <option class="operation">led2</option>
+            </select>
+            <a class="operator"> =</a>
+             <input type="text" class="p-repetir-input">
+           </div>
+           </div>
+            <!-- LED e-->
+           <div id = "lede" class="p-bloque p-expr c-fun" tipo="lede">
+           <div id ="exp-igual-cont-le"  class="p-expr-in">
+             <select class="">
+                 <option class="operation">led1</option>
+                <option class="operation">led2</option>
+            </select>
+            <a class="operator"> =</a>
+              <select class="">
+                <option class="operation">Encendido</option>
+                <option class="operation">Apagado</option>
+            </select>
+           </div>
+           </div>
+           <!-- Motor -->
+           <div id = "exp-igual-m" class="p-bloque p-expr c-fun" tipo="motor">
+           <div id ="exp-igual-cont-m"  class="p-expr-in">
+             <select class="">
+                <option class="operation">motor1</option>
+                <option class="operation">motor2</option>
+            </select>
+            <a class="operator"> =</a>
+            <select class="">
+                <option class="operation">Alto</option>
+                <option class="operation">Derecha</option>
+                <option class="operation">Izquiera</option>
+            </select>
+           </div>
+           </div>
+         
+           <!-- Boton -->
+           <div id = "exp-igual-bo" class="p-bloque p-expr c-fun" tipo="boton">
+           <div id ="exp-igual-cont-bo"  class="p-expr-in">
+             <input type="text" class="p-repetir-input">
+            <a class="operator"> =</a>
+             <select class="">
+                <option class="operation">Boton0</option>
+                <option class="operation">Boton1</option>
+            </select>
+           </div>
+           </div>
+           
+             <!-- Temp -->
+           <div id = "exp-igual-t" class="p-bloque p-expr c-fun" tipo="temp">
+           <div id ="exp-igual-cont-t"  class="p-expr-in">
+             <input type="text" class="p-repetir-input">
+            <a class="operator"> =</a>
+             Temperatura
+           </div>
+           </div>
+           
+           <!-- Analogo -->
+           <div id = "exp-igual-a" class="p-bloque p-expr c-fun" tipo="analog">
+           <div id ="exp-igual-cont-a"  class="p-expr-in">
+             <input type="text" class="p-repetir-input">
+            <a class="operator"> =</a>
+             Analogo
+           </div>
+           </div>
+           
+           
          <h5 class="label" onclick="hideShowClass('c-expr');">
            <a href="#">
              Expresiones
@@ -215,7 +295,6 @@
           <div class="p-bloque p-fin" tipo="end">
             <a class="l-inicio">Fin</a>
           </div>
-          <span tipo="end-m"/>
         </div>
         <!-- Fin de Programa -->
       </div>

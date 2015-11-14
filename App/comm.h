@@ -30,12 +30,18 @@ public:
 
     uint8_t poll(const SMess mess);
 
+    bool buttonValue(int idx);
+    int tempValue();
+    int analogValue();
+    int motor(int idx, int cmd);
+
 
 signals:
     void error(const QString &msg, int addr = 0x40);
 
 public slots:
     void openDevice(const QString &msg, int addr);
+    void setLed(int idx, bool v);
 private:
     int fd = -1;
 };

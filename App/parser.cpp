@@ -1,8 +1,12 @@
 #include "parser.h"
+#include <assert.h>
+#include <QThread>
 
-Parser::Parser(QObject *parent) : QObject(parent),
-    st(STOPPED)
+Parser::Parser(Comm *c, QObject *parent) : QObject(parent),
+    st(STOPPED),
+    comm(c)
 {
+    assert(c);
     connect(&timer, &QTimer::timeout,
             this, &Parser::tick);
     types["asig"] = ASIG;
@@ -16,6 +20,19 @@ Parser::Parser(QObject *parent) : QObject(parent),
     types["end"] = END;
     types["no-type"] = NO_TYPE;
     types["mess"] = MESS;
+    types["led"] = LED;
+    types["boton"] = BUTTON;
+    types["temp"] = TEMP;
+    types["analog"] = ANA;
+    types["delay"] = DELAY;
+    types["motor"] = MOTOR;
+
+    led_s[ON] = tr("Encendido");
+    led_s[OFF] = tr("Apagado");
+
+    motor_s[STOP] = tr("Alto");
+    motor_s[RIGHT] = tr("Derecha");
+    motor_s[LEFT] = tr("Izquierda");
 
 }
 
@@ -248,6 +265,83 @@ void Parser::tick()
         message(m);
     }
     break;
+
+    case LED:{
+        QString led_st = inst.value("led").toString("led0");
+        QString index_s = led_st.right(1);
+        int idx = index_s.toInt();
+
+        QString state_s = inst.value("op").toString(led_s[ON]);
+        bool state = false;
+
+        if(state_s == led_s[ON]){
+            state = true;
+        }
+        else if(state_s == led_s[OFF]){
+            state = false;
+        }
+        else {
+            state = simbols.busca(state_s.toStdString()).valorBool();
+        }
+        comm->setLed(idx, state);
+        led(idx, state);
+    }
+    break;
+
+    case BUTTON:{
+        QString b_s = inst.value("boton").toString("0");
+        int idx = b_s.right(1).toInt();
+        auto op_s = inst.value("op").toString("A").toStdString();
+        bool v = comm->buttonValue(idx);
+        simbols.actuliazaCrea(op_s, v);
+    }
+    break;
+
+    case TEMP:{
+        auto op_s = inst.value("op").toString("A").toStdString();
+        int v = comm->tempValue();
+        simbols.actuliazaCrea(op_s, double(v));
+    }
+    break;
+
+    case ANA:{
+        auto op_s = inst.value("op").toString("A").toStdString();
+        int v = comm->analogValue();
+        simbols.actuliazaCrea(op_s, double(v));
+    }
+    break;
+
+    case DELAY:{
+        auto op_s = inst.value("delay").toString("0");
+        int secs = 0;
+        Variable v = simbols.busca(op_s.toStdString());
+        if(v.mi_tipo() != Variable::SinTipo){
+            secs = v.valorDouble();
+        }
+        else {
+            secs =  op_s.toInt();
+        }
+
+        QThread::sleep(secs);
+    }
+    break;
+
+    case MOTOR:{
+        QString m  = inst.value("motor").toString("0");
+        int idx = m.toInt();
+        QString cmd = inst.value("op").toString(motor_s[STOP]);
+        MOTOR_V v = STOP;
+        if(cmd == motor_s[STOP]){
+            v = STOP;
+        }
+        else if(cmd == motor_s[LEFT]){
+            v = LEFT;
+        }
+        else if(cmd == motor_s[RIGHT]){
+            v = RIGHT;
+        }
+        comm->motor(idx, v);
+    }
 
     case BEGIN:
     case END:
