@@ -7,12 +7,6 @@ Comm::Comm(QObject *parent) : QObject(parent)
 
 }
 
-uint8_t Comm::poll(const SMess mess)
-{
-    Q_UNUSED(mess);
-
-    return 0;
-}
 
 bool Comm::buttonValue(int idx)
 {
@@ -24,7 +18,7 @@ bool Comm::buttonValue(int idx)
     return r;
 }
 
-int Comm::tempValue()
+float Comm::tempValue()
 {
     static int t = 0;
     int r = t;
@@ -38,25 +32,22 @@ int Comm::analogValue()
     return int(sin(c++)*100);
 }
 
-int Comm::motor(int idx, int cmd)
+void Comm::motor(int idx, int cmd)
 {
     qDebug() << "Motor" << idx << ":" << cmd;
 }
 
-Comm::Comm(const QString &i2cDevice, int idx)
-{
-    openDevice(i2cDevice, idx);
-}
 
-void Comm::openDevice(const QString &msg, int addr)
-{
-    qDebug() << "open: " << msg << ":" << addr;
-
-}
 
 void Comm::setLed(int idx, bool v)
 {
     qDebug() << "Led" << idx << ":" << v;
+
+}
+
+bool Comm::open()
+{
+    return true;
 
 }
 

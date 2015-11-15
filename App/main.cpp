@@ -3,9 +3,10 @@
 #include<QDebug>
 #include<iostream>
 #include <memory>
+#include <assert.h>
 #include"mainwindow.h"
 #include "parser.h"
-#include "comm.h"
+#include "commserial.h"
 
 //#define TEST
 
@@ -34,7 +35,8 @@ int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
     MainWindow w;
-    std::unique_ptr<Comm> c(new Comm);
+    std::unique_ptr<CommSerial> c(new CommSerial);
+    assert(c->open());
     Parser parser(c.get());
     w.loadPage();
     w.registerObjectInJs("parser", &parser);

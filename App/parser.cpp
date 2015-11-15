@@ -1,6 +1,6 @@
 #include "parser.h"
 #include <assert.h>
-#include <QThread>
+#include <QTimer>
 
 Parser::Parser(Comm *c, QObject *parent) : QObject(parent),
     st(STOPPED),
@@ -110,6 +110,9 @@ Variable Parser::varGuessingType(const std::string &v)
 
 void Parser::tick()
 {
+    if(delay){
+        return;
+    }
     auto &last = stack.last();
     QJsonObject inst = last.ctx.at(pc).toObject();
     QString t_string = inst.value("type").toString("no-type");
@@ -129,7 +132,7 @@ void Parser::tick()
                               var);
 
     }
-    break;
+        break;
 
     case EXPROP:{
         QJsonValue var_jvalue =inst.value("var");
@@ -154,7 +157,7 @@ void Parser::tick()
         Variable var = op1.operacionPorNombre(op, op2);
         simbols.actuliazaCrea(var_name, var);
     }
-    break;
+        break;
 
     case LOOP:{
         QString times_s = inst.value("times").toString("0");
@@ -171,7 +174,7 @@ void Parser::tick()
         stack.push_back(ctx);
 
     }
-    break;
+        break;
 
     case WHILE:{
         QJsonArray child = inst.value("children").toArray();
@@ -192,7 +195,7 @@ void Parser::tick()
         stack.push_back(ctx);
 
     }
-    break;
+        break;
 
     case IF:{
         QJsonObject cond_o = inst.value("conditional").toObject();
@@ -220,7 +223,7 @@ void Parser::tick()
             stack.push_back(ctx);
         }
     }
-    break;
+        break;
     case IFELSE:{
         QJsonObject cond_o = inst.value("conditional1").toObject();
         auto op1_name = cond_o.value("op1").toString("A").toStdString();
@@ -253,7 +256,7 @@ void Parser::tick()
         stack.push_back(ctx);
 
     }
-    break;
+        break;
 
     case MESS:{
         QString m = inst.value("message").toString("Hola mundo");
@@ -264,7 +267,7 @@ void Parser::tick()
         m = QString::fromStdString(var.valorString());
         message(m);
     }
-    break;
+        break;
 
     case LED:{
         QString led_st = inst.value("led").toString("led0");
@@ -283,52 +286,56 @@ void Parser::tick()
         else {
             state = simbols.busca(state_s.toStdString()).valorBool();
         }
-        comm->setLed(idx, state);
-        led(idx, state);
+        comm->setLed(idx - 1, state);
     }
-    break;
+        break;
 
     case BUTTON:{
         QString b_s = inst.value("boton").toString("0");
         int idx = b_s.right(1).toInt();
         auto op_s = inst.value("op").toString("A").toStdString();
-        bool v = comm->buttonValue(idx);
+        bool v = comm->buttonValue(idx - 1);
         simbols.actuliazaCrea(op_s, v);
     }
-    break;
+        break;
 
     case TEMP:{
         auto op_s = inst.value("op").toString("A").toStdString();
-        int v = comm->tempValue();
+        float v = comm->tempValue();
         simbols.actuliazaCrea(op_s, double(v));
     }
-    break;
+        break;
 
     case ANA:{
         auto op_s = inst.value("op").toString("A").toStdString();
         int v = comm->analogValue();
         simbols.actuliazaCrea(op_s, double(v));
     }
-    break;
+        break;
 
     case DELAY:{
-        auto op_s = inst.value("delay").toString("0");
-        int secs = 0;
-        Variable v = simbols.busca(op_s.toStdString());
-        if(v.mi_tipo() != Variable::SinTipo){
-            secs = v.valorDouble();
-        }
-        else {
-            secs =  op_s.toInt();
-        }
 
-        QThread::sleep(secs);
+        if(!delay){
+            delay = true;
+            auto op_s = inst.value("delay").toString("0");
+            int secs = 0;
+            Variable v = simbols.busca(op_s.toStdString());
+            if(v.mi_tipo() != Variable::SinTipo){
+                secs = v.valorDouble();
+            }
+            else {
+                secs =  op_s.toInt();
+            }
+            QTimer::singleShot(secs*1000,[this](){
+                delay = false;
+            });
+        }
     }
-    break;
+        break;
 
     case MOTOR:{
         QString m  = inst.value("motor").toString("0");
-        int idx = m.toInt();
+        int idx = m.right(1).toInt();
         QString cmd = inst.value("op").toString(motor_s[STOP]);
         MOTOR_V v = STOP;
         if(cmd == motor_s[STOP]){
@@ -340,7 +347,7 @@ void Parser::tick()
         else if(cmd == motor_s[RIGHT]){
             v = RIGHT;
         }
-        comm->motor(idx, v);
+        comm->motor(idx - 1, v);
     }
 
     case BEGIN:

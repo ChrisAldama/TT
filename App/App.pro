@@ -1,7 +1,7 @@
 TEMPLATE = app
-QMAKE_CXXFLAGS += -std=gnu++0x
+CONFIG += c++11
 
-QT += widgets webkitwidgets
+QT += widgets webkitwidgets serialport
 
 SOURCES += main.cpp \
     mainwindow.cpp \
@@ -9,7 +9,8 @@ SOURCES += main.cpp \
     variable.cpp \
     tablavariables.cpp \
     test.cpp \
-    comm.cpp
+    comm.cpp \
+    commserial.cpp
 
 RESOURCES += qml.qrc
 
@@ -28,7 +29,8 @@ HEADERS += \
     variable.h \
     tablavariables.h \
     test.h \
-    comm.h
+    comm.h \
+    commserial.h
 
 DISTFILES += \
     p_test.olinki \

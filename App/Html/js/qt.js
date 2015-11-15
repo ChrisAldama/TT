@@ -13,5 +13,7 @@ var   WebChannel = {
   parser.message.connect(function(mess){
     var c = document.getElementById("consola");
     c.innerHTML += "<p>" + mess + "</p>";
+    var cont = c.parentElement;
+    cont.scrollTop = cont.scrollHeight;
   });
 })();

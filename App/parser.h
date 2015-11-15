@@ -48,14 +48,14 @@ public:
     };
 
     enum LED_V {
-        ON,
-        OFF
+        ON = 1,
+        OFF = 0
     };
 
     enum MOTOR_V {
         STOP = 0,
         RIGHT = 1,
-        LEFT = -1
+        LEFT = 2
 
     };
 
@@ -99,6 +99,7 @@ private:
     QList<BPoint> stack;
     State st;
     Comm *comm;
+    bool delay = false;
 private slots:
 
 

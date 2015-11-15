@@ -95,7 +95,7 @@
             <select class="">
                 <option class="operation">Alto</option>
                 <option class="operation">Derecha</option>
-                <option class="operation">Izquiera</option>
+                <option class="operation">Izquierda</option>
             </select>
            </div>
            </div>
@@ -263,12 +263,14 @@
             <div id = "exp-sino-abajo" class="p-sino-inf"></div>
           </div>
         </div>
+        <!-- CONSOLA -->
         <h5 class="label" onclick="hideShowClass('c-cons');">
           <a href="#">Consola</a>
         </h5>
-        <div class="label c-cons">
+        <div id="c-container" class="label c-cons">
           <div id="consola"></div>
         </div>
+        <a class="button label" onclick="clear_console();">Limpia</a>
 
         </div>
       <div class="two-thirds column" id="programa-view">
@@ -351,6 +353,10 @@ function hideShowClass(className){
   }
 
 
+}
+
+function clear_console(){
+  document.getElementById("consola").innerHTML = "";
 }
 
 </script>
