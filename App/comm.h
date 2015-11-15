@@ -5,6 +5,8 @@
 #include <QString>
 #include <stdint.h>
 
+using Out = uint8_t;
+
 class Comm : public QObject
 {
     Q_OBJECT
@@ -26,11 +28,11 @@ public:
         uint8_t val;
     };
 
-    union Out{
+    /*struct Out{
         uint8_t b;
-        bool v;
-        float f;
-    };
+        uint8_t v;
+        uint8_t f;
+    };*/
 
 
 public:

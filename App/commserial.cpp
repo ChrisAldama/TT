@@ -1,4 +1,5 @@
 #include "commserial.h"
+#include <QDebug>
 
 #ifdef __linux__
 #define SERIAL "ttyUsb0"
@@ -13,6 +14,7 @@ CommSerial::CommSerial(QObject *parent):
     port()
 {
     port.setPortName(SERIAL);
+    qDebug() << "Out Size:" << sizeof(Out);
 }
 
 bool CommSerial::buttonValue(int idx)
@@ -28,7 +30,9 @@ bool CommSerial::buttonValue(int idx)
     port.waitForReadyRead(1000);
     port.read((char*)&out, sizeof(Out));
 
-    return out.v;
+    qDebug() << "button" << idx << ": " << out;
+
+    return out;
 }
 
 float CommSerial::tempValue()
@@ -42,7 +46,9 @@ float CommSerial::tempValue()
     port.waitForReadyRead(1000);
     port.read((char*)&out, sizeof(Out));
 
-    return out.f;
+    qDebug() << "temp: " << out;
+
+    return float(out)/100.0f;
 
 }
 
@@ -57,7 +63,9 @@ int CommSerial::analogValue()
     port.waitForReadyRead(1000);
     port.read((char*)&out, sizeof(Out));
 
-    return out.b;
+    qDebug() << "analog: " << out;
+
+    return out;
 
 }
 
@@ -74,6 +82,8 @@ void CommSerial::motor(int idx, int cmd)
     port.waitForBytesWritten(1000);
     port.waitForReadyRead(1000);
     port.read((char*)&out, sizeof(Out));
+
+    qDebug() << "motor" << idx << ": " << out;
 }
 
 void CommSerial::setLed(int idx, bool v)
@@ -89,6 +99,8 @@ void CommSerial::setLed(int idx, bool v)
     port.waitForBytesWritten(1000);
     port.waitForReadyRead(1000);
     port.read((char*)&out, sizeof(Out));
+
+    qDebug() << "led" << idx << ": " << out;
 }
 
 bool CommSerial::open()

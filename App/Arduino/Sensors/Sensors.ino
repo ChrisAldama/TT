@@ -20,16 +20,10 @@ enum MOTOR_V {
 };
 
 struct SMess {
-	uint8_t sensor,
-			idx;
-	uint8_t val;
-};
-
-union Out{
-	uint8_t b;
-	bool v;
-	float f;
-};
+        uint8_t sensor;
+        uint8_t idx;
+        uint8_t val;
+    };
 
 const int i2c_addr = 0x40;
 const int button_pin[2] = {0,1};
@@ -38,7 +32,7 @@ const int motor_pin[2][2] = { {2, 3},{4, 5} };
 const int led_pin[2] = {6, 7};
 const int temp_pin = 8;
 const uint8_t m_values[3][2] = { {0,0}, {1,0}, {0,1} };
-Out output;
+uint8_t output;
 
 DHT_Unified dht(temp_pin, DHT11);
 
@@ -79,7 +73,7 @@ void loop()
 	SMess m;
 	Serial.readBytes((uint8_t*)&m, sizeof(SMess));
 	processData(m);
-	Serial.println(output.f);
+	Serial.write((uint8_t*)&output, sizeof(uint8_t));
 
 #endif
 }
@@ -110,30 +104,31 @@ void processData(const SMess &m)
 
 	switch (m.sensor) {
 	case CONTACT:
-		output.b = digitalRead(button_pin[m.idx]);
+		output = digitalRead(button_pin[m.idx]);
 		break;
 
 	case TEMP:
-		output.f = decodeTemp();
+		output = decodeTemp();
 		break;
 
 	case MOTOR:
 		decodeMotor(m.idx, m.val);
-		output.v = true;
+		output = true;
 		break;
 
 	case LED:
 		digitalWrite(led_pin[m.idx], m.val);
-		output.v = true;
+		output = true;
 		break;
 
 	case ANALOG:
 		analog = analogRead(analog_pin);
-		output.b = map(analog, 0, 1023, 0, 255);
+		output = map(analog, 0, 1023, 0, 255);
+    output = analog;
 		break;
 
 	default:
-		output.b = 0;
+		output = 0;
 		break;
 	}
 }
@@ -148,5 +143,5 @@ void receive(int bytes)
 
 void send()
 {
-	Wire.write((uint8_t*)(&output), sizeof(Out));
+	Wire.write((uint8_t*)(&output), sizeof(uint8_t));
 }
