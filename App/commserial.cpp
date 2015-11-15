@@ -2,12 +2,17 @@
 #include <QDebug>
 
 #ifdef __linux__
-#define SERIAL "ttyUsb0"
+#define SERIAL "ttyUSB0"
 #elif _WIN32
 #define SERIAL "COM3"
 #else
 #define SERIAL "default"
 #endif
+
+float map(float x, float in_min, float in_max, float out_min, float out_max)
+{
+  return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+}
 
 CommSerial::CommSerial(QObject *parent):
     Comm(parent),
@@ -48,7 +53,8 @@ float CommSerial::tempValue()
 
     qDebug() << "temp: " << out;
 
-    return float(out)/100.0f;
+    float temp = map(out,0,155,0,50);
+    return temp;
 
 }
 
@@ -58,11 +64,10 @@ int CommSerial::analogValue()
     m.sensor = ANALOG;
     Out out;
 
-    port.write((const char*)&m, sizeof(m));
-    port.waitForBytesWritten(1000);
-    port.waitForReadyRead(1000);
+    port.write((const char*)&m, sizeof(SMess));
+    port.waitForBytesWritten(300);
+    port.waitForReadyRead(300);
     port.read((char*)&out, sizeof(Out));
-
     qDebug() << "analog: " << out;
 
     return out;
