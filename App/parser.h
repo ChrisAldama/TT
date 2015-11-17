@@ -71,11 +71,16 @@ public:
         QJsonArray ctx;     //Contexto actual
         Parser::Types type; //Tipo de Contexto
         ProgramCounter ins; //Punto de entrada de proximo ctx
-        int loop_counter = 0;
-        int loop_ceiling = 0;
+        int loop_counter;
+        int loop_ceiling;
         std::string op1_name;
         std::string op2_name;
         std::string op_name;
+
+        BPoint(){
+            loop_counter = 0;
+            loop_ceiling = 0;
+        }
 
     };
 
