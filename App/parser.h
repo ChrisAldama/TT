@@ -89,6 +89,7 @@ signals:
 
 public slots:
        void tick();
+       void disable_delay();
 private:
     QTimer timer;
     QMap<QString, Types> types;
@@ -99,7 +100,7 @@ private:
     QList<BPoint> stack;
     State st;
     Comm *comm;
-    bool delay = false;
+    bool delay;
 private slots:
 
 

@@ -2,7 +2,8 @@
 #include "math.h"
 #include <QDebug>
 
-Comm::Comm(QObject *parent) : QObject(parent)
+Comm::Comm(QObject *parent) : QObject(parent),
+    fd(-1)
 {
 
 }

@@ -4,7 +4,8 @@
 
 Parser::Parser(Comm *c, QObject *parent) : QObject(parent),
     st(STOPPED),
-    comm(c)
+    comm(c),
+    delay(false)
 {
     assert(c);
     connect(&timer, &QTimer::timeout,
@@ -318,7 +319,7 @@ void Parser::tick()
         if(!delay){
             delay = true;
             auto op_s = inst.value("delay").toString("0");
-            int secs = 0;
+            double secs = 0;
             Variable v = simbols.busca(op_s.toStdString());
             if(v.mi_tipo() != Variable::SinTipo){
                 secs = v.valorDouble();
@@ -326,9 +327,11 @@ void Parser::tick()
             else {
                 secs =  op_s.toInt();
             }
-            QTimer::singleShot(secs*1000,[this](){
+            /*QTimer::singleShot(secs*1000,[this](){
                 delay = false;
-            });
+            });Support for Qt 5.2 :(  */
+
+            QTimer::singleShot(secs*1000, this, SLOT(disable_delay()));
         }
     }
         break;
@@ -409,6 +412,12 @@ void Parser::tick()
             st = FINISHED;
         }
     }
+
+}
+
+void Parser::disable_delay()
+{
+    delay = false;
 
 }
 

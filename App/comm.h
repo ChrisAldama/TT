@@ -28,13 +28,6 @@ public:
         uint8_t val;
     };
 
-    /*struct Out{
-        uint8_t b;
-        uint8_t v;
-        uint8_t f;
-    };*/
-
-
 public:
     explicit Comm(QObject *parent = 0);
 
@@ -50,7 +43,7 @@ signals:
 
 public slots:
 private:
-    int fd = -1;
+    int fd;
 };
 
 #endif // COMM_H
