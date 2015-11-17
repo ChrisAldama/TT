@@ -5,6 +5,8 @@
 #include <QObject>
 #include <QtSerialPort>
 
+#define override
+
 class CommSerial : public Comm
 {
 public:

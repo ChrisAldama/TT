@@ -5,7 +5,8 @@
 #include <QString>
 #include <stdint.h>
 
-using Out = uint8_t;
+//using Out = uint8_t;
+typedef uint8_t Out;
 
 class Comm : public QObject
 {

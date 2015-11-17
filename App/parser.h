@@ -15,7 +15,9 @@
 #include <QJsonArray>
 #include <QList>
 
-using ProgramCounter = int;
+//using ProgramCounter = int;
+
+typedef int ProgramCounter;
 
 class Parser : public QObject
 {
