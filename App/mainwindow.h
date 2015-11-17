@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QKeyEvent>
 
 namespace Ui {
 class MainWindow;
@@ -15,9 +16,13 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+    void keyReleaseEvent(QKeyEvent *ev);
+
+
 public slots:
     void loadPage();
     void registerObjectInJs(const QString &name, QObject *obj);
+
 
 private:
     Ui::MainWindow *ui;

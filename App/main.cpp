@@ -36,7 +36,7 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
     MainWindow w;
     std::unique_ptr<CommSerial> c(new CommSerial);
-    assert(c->open());
+    c->open();
     Parser parser(c.get());
     w.loadPage();
     w.registerObjectInJs("parser", &parser);

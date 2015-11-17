@@ -20,6 +20,21 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::keyReleaseEvent(QKeyEvent *ev)
+{
+    if(ev->modifiers() & Qt::ControlModifier){
+        qreal zoom = ui->webView->zoomFactor();
+        if(ev->key() == Qt::Key_Plus){
+            ui->webView->setZoomFactor(zoom * 1.1);
+
+        }
+        else if(ev->key() == Qt::Key_Minus){
+            ui->webView->setZoomFactor(zoom / 1.1);
+
+        }
+    }
+}
+
 void MainWindow::loadPage()
 {
     QUrl url("qrc:/Html/index.html");
