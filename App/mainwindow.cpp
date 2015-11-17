@@ -30,7 +30,9 @@ void MainWindow::keyReleaseEvent(QKeyEvent *ev)
         }
         else if(ev->key() == Qt::Key_Minus){
             ui->webView->setZoomFactor(zoom / 1.1);
-
+        }
+        else if(ev->key() == Qt::Key_Q){
+            this->close();
         }
     }
 }
