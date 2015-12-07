@@ -30,7 +30,7 @@ float Comm::tempValue()
 int Comm::analogValue()
 {
     static int c = 0;
-    return int(sin(c++)*100);
+    return int(sin(c++) * 255.0);
 }
 
 void Comm::motor(int idx, int cmd)

@@ -5,6 +5,7 @@
 #include <memory>
 #include <assert.h>
 #include"mainwindow.h"
+#include "filemanager.h"
 #include "parser.h"
 #include "commserial.h"
 
@@ -35,11 +36,14 @@ int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
     MainWindow w;
+    FileManager file(&w);
     std::unique_ptr<CommSerial> c(new CommSerial);
     c->open();
     Parser parser(c.get());
+
     w.loadPage();
     w.registerObjectInJs("parser", &parser);
+    w.registerObjectInJs("file", &file);
 
     w.show();
     return app.exec();

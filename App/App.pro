@@ -10,7 +10,8 @@ SOURCES += main.cpp \
     tablavariables.cpp \
     test.cpp \
     comm.cpp \
-    commserial.cpp
+    commserial.cpp \
+    filemanager.cpp
 
 RESOURCES += qml.qrc
 
@@ -30,7 +31,8 @@ HEADERS += \
     tablavariables.h \
     test.h \
     comm.h \
-    commserial.h
+    commserial.h \
+    filemanager.h
 
 DISTFILES += \
     p_test.olinki \

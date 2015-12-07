@@ -16,4 +16,9 @@ var   WebChannel = {
     var cont = c.parentElement;
     cont.scrollTop = cont.scrollHeight;
   });
+
+  file.programLoaded.connect(function(json){
+    console.log(json);
+    unparse(json);
+  });
 })();

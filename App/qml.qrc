@@ -16,5 +16,6 @@
         <file>Html/css/skeleton.css</file>
         <file>Html/js/qwebchannel.js</file>
         <file>Html/js/qt.js</file>
+        <file>Html/js/unparse.js</file>
     </qresource>
 </RCC>

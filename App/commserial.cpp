@@ -31,11 +31,9 @@ bool CommSerial::buttonValue(int idx)
     Out out;
 
     port.write((const char*)&m, sizeof(m));
-    port.waitForBytesWritten(1000);
-    port.waitForReadyRead(1000);
+    port.waitForBytesWritten(30);
+    port.waitForReadyRead(30);
     port.read((char*)&out, sizeof(Out));
-
-    qDebug() << "button" << idx << ": " << out;
 
     return out;
 }
@@ -47,8 +45,8 @@ float CommSerial::tempValue()
     Out out;
 
     port.write((const char*)&m, sizeof(m));
-    port.waitForBytesWritten(1000);
-    port.waitForReadyRead(1000);
+    port.waitForBytesWritten(30);
+    port.waitForReadyRead(30);
     port.read((char*)&out, sizeof(Out));
 
     qDebug() << "temp: " << out;
@@ -65,8 +63,8 @@ int CommSerial::analogValue()
     Out out;
 
     port.write((const char*)&m, sizeof(SMess));
-    port.waitForBytesWritten(300);
-    port.waitForReadyRead(300);
+    port.waitForBytesWritten(30);
+    port.waitForReadyRead(30);
     port.read((char*)&out, sizeof(Out));
     qDebug() << "analog: " << out;
 
@@ -84,8 +82,8 @@ void CommSerial::motor(int idx, int cmd)
     Out out;
 
     port.write((const char*)&m, sizeof(m));
-    port.waitForBytesWritten(1000);
-    port.waitForReadyRead(1000);
+    port.waitForBytesWritten(30);
+    port.waitForReadyRead(30);
     port.read((char*)&out, sizeof(Out));
 
     qDebug() << "motor" << idx << ": " << out;
@@ -101,8 +99,8 @@ void CommSerial::setLed(int idx, bool v)
     Out out;
 
     port.write((const char*)&m, sizeof(m));
-    port.waitForBytesWritten(1000);
-    port.waitForReadyRead(1000);
+    port.waitForBytesWritten(30);
+    port.waitForReadyRead(30);
     port.read((char*)&out, sizeof(Out));
 
     qDebug() << "led" << idx << ": " << out;

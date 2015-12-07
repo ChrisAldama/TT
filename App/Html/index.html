@@ -15,7 +15,7 @@
 
   <!-- FONT
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link href="http://fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+  <!-- link href="http://fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css" -->
 
   <!-- CSS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -99,19 +99,19 @@
             </select>
            </div>
            </div>
-         
+
            <!-- Boton -->
            <div id = "exp-igual-bo" class="p-bloque p-expr c-fun" tipo="boton">
            <div id ="exp-igual-cont-bo"  class="p-expr-in">
              <input type="text" class="p-repetir-input">
             <a class="operator"> =</a>
              <select class="">
-                <option class="operation">Boton0</option>
                 <option class="operation">Boton1</option>
+                <option class="operation">Boton2</option>
             </select>
            </div>
            </div>
-           
+
              <!-- Temp -->
            <div id = "exp-igual-t" class="p-bloque p-expr c-fun" tipo="temp">
            <div id ="exp-igual-cont-t"  class="p-expr-in">
@@ -120,7 +120,7 @@
              Temperatura
            </div>
            </div>
-           
+
            <!-- Analogo -->
            <div id = "exp-igual-a" class="p-bloque p-expr c-fun" tipo="analog">
            <div id ="exp-igual-cont-a"  class="p-expr-in">
@@ -129,8 +129,8 @@
              Analogo
            </div>
            </div>
-           
-           
+
+
          <h5 class="label" onclick="hideShowClass('c-expr');">
            <a href="#">
              Expresiones
@@ -286,6 +286,16 @@
               Detiene
             </a>
           </li>
+          <li class="m_menu_item">
+            <a onclick="guarda();" class="button">
+              Guarda
+            </a>
+          </li>
+          <li class="m_menu_item">
+            <a onclick="carga();" class="button">
+              Abrir
+            </a>
+          </li>
        </ul>
         <!-- Prgrama -->
         <div id="program" class="program">
@@ -311,6 +321,7 @@
   <script src="js/index.js"></script>
   <script src="js/qwebchannel.js"></script>
   <script src="js/parser.js"></script>
+  <script src="js/unparse.js"></script>
   <script src="js/qt.js"></script>
     <!-- Conversion Json -->
 <script type="text/javascript">
@@ -328,7 +339,7 @@ function detiene(){
 }
 
 function getIndexCSS(className){
-  var css = document.styleSheets[4];
+  var css = document.styleSheets[3];
   var rules = css.cssRules || ss.rules;
   var rule = null;
   var reg = new RegExp("(^|,) *\."+className+" *(,|$)");
@@ -355,9 +366,22 @@ function hideShowClass(className){
 
 }
 
+function guarda(){
+  var r = parse(document.getElementById("program").children);
+  file.saveProgram(JSON.stringify(r));
+
+
+}
+
+function carga(){
+  file.loadProgram();
+}
+
 function clear_console(){
   document.getElementById("consola").innerHTML = "";
 }
+
+
 
 </script>
 </body>

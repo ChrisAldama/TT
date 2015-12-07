@@ -43,10 +43,7 @@ void processData(const SMess &m);
 
 void setup()
 {
-
-	Wire.begin(i2c_addr);
-	Wire.onReceive(receive);
-	Wire.onRequest(send);
+  	Serial.begin(9600);
 
 	pinMode(button_pin[0], INPUT);
 	pinMode(button_pin[1], INPUT);
@@ -59,21 +56,21 @@ void setup()
 	pinMode(led_pin[0], OUTPUT);
 	pinMode(led_pin[1], OUTPUT);
 
-#ifdef SERIAL_S
-	Serial.begin(9600);
-#endif
 }
 
 void loop()
 {
-	delay(100);
+	//delay(100);
 
 #ifdef SERIAL_S
 
+if(Serial.available()){
 	SMess m;
-	Serial.readBytes((uint8_t*)&m, sizeof(SMess));
+	Serial.readBytes((char*)&m, sizeof(SMess));
 	processData(m);
-	Serial.write((uint8_t*)&output, sizeof(uint8_t));
+	Serial.write((char*)&output, sizeof(uint8_t));
+        Serial.flush();
+}
 
 #endif
 }
@@ -136,7 +133,7 @@ void processData(const SMess &m)
 void receive(int bytes)
 {
 	SMess m;
-	Wire.readBytes((uint8_t*)&m, sizeof(SMess));
+	Wire.readBytes((char*)&m, sizeof(SMess));
 	processData(m);
 	
 }
